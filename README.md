@@ -315,9 +315,7 @@ toInteger(FiscalYear) >= $dataflow_param_fiscalyear
    * Store results in SQL DB and Synapse Analytics
 2. Trigger the pipeline manually or using a schedule
 3. Monitor pipeline execution
-4. Verify data in SQL DB and Synapse
-   <img width="1920" height="1080" alt="Screenshot (184)" src="https://github.com/user-attachments/assets/cf4cd330-7d25-4759-9178-37650ae6f78b" />
-Analytics
+4. Verify data in SQL DB and Synapse Analytics
 
 ---
 
