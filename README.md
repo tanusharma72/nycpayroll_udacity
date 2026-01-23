@@ -313,49 +313,42 @@ Create a single pipeline in Azure Data Factory with the following 6 data sources
 
 Source Datasets (6):
 
-EmpMaster
-
-TitleMaster
-
-AgencyMaster
-
-NYC_Payroll_Data_2020
-
-NYC_Payroll_Data_2021
-
-Payroll Summary
+*`EmpMaster`
+*`TitleMaster`
+*`AgencyMaster`
+*`NYC_Payroll_Data_2020`
+*`NYC_Payroll_Data_2021`
+*`Payroll Summary`
 
 8.2 Pipeline Flow & Connections
 
 Arrange the three master datasets:
 
-EmpMaster
+*`EmpMaster`
 
-TitleMaster
+*`TitleMaster`
 
-AgencyMaster
+*`AgencyMaster`
 
 Place them at the start of the pipeline.
 
 Connect all three master datasets using blue dependency arrows to both payroll datasets:
 
-NYC_Payroll_Data_2020
+*`NYC_Payroll_Data_2020`
 
-NYC_Payroll_Data_2021
+*`NYC_Payroll_Data_2021`
 
 This indicates that master data must be loaded before processing yearly payroll data.
 
 After successful execution of both payroll datasets:
 
-Connect NYC_Payroll_Data_2020 → Payroll Summary
+**`Connect NYC_Payroll_Data_2020 → Payroll Summary`
 
-Connect NYC_Payroll_Data_2021 → Payroll Summary
+**`Connect NYC_Payroll_Data_2021 → Payroll Summary`
 
-The Payroll Summary activity runs the aggregation data flow and writes results to:
+* Validate All
+* Publish 
 
-Azure SQL Database summary table
-
-Azure Synapse Analytics external table
 
 8.3 Pipeline Execution
 
@@ -364,6 +357,8 @@ Trigger the pipeline manually or via schedule
 Monitor execution using the ADF Monitor tab
 
 Ensure all activities complete successfully
+
+
 ## Final Verification
 
 * Ensure all pipelines succeed
