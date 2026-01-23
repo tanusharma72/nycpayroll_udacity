@@ -297,28 +297,73 @@ toInteger(FiscalYear) >= $dataflow_param_fiscalyear
 7. Add an **Aggregate** transformation
 
    * Group By: `AgencyName`, `FiscalYear`
-   * Aggregation: `sum(TotalPaid)`
+   * Aggregation: `TotalOTPaod -> sum(TotalPaid)`
 
 8. Add two **Sink** transformations:
 
-   * Sink 1: SQL DB Summary Table (Enable *Truncate Table*)
-   * Sink 2: Azure Synapse Analytics Summary Table (Enable *Truncate Table*)
+   * Sink 1: Select Staging dataset 
+   * Sink 2: Select Summary SQLDB dataset
 
 ---
 
-## Step 8: Pipeline Creation & Execution
+Step 8: Pipeline Creation & Execution
+8.1 Pipeline Design
 
-1. Create a pipeline in Azure Data Factory to:
+Create a single pipeline in Azure Data Factory with the following 6 data sources arranged clearly for better readability and lineage tracking:
 
-   * Load source data into SQL DB
-   * Execute summary aggregation data flow
-   * Store results in SQL DB and Synapse Analytics
-2. Trigger the pipeline manually or using a schedule
-3. Monitor pipeline execution
-4. Verify data in SQL DB and Synapse Analytics
+Source Datasets (6):
 
----
+EmpMaster
 
+TitleMaster
+
+AgencyMaster
+
+NYC_Payroll_Data_2020
+
+NYC_Payroll_Data_2021
+
+Payroll Summary
+
+8.2 Pipeline Flow & Connections
+
+Arrange the three master datasets:
+
+EmpMaster
+
+TitleMaster
+
+AgencyMaster
+
+Place them at the start of the pipeline.
+
+Connect all three master datasets using blue dependency arrows to both payroll datasets:
+
+NYC_Payroll_Data_2020
+
+NYC_Payroll_Data_2021
+
+This indicates that master data must be loaded before processing yearly payroll data.
+
+After successful execution of both payroll datasets:
+
+Connect NYC_Payroll_Data_2020 → Payroll Summary
+
+Connect NYC_Payroll_Data_2021 → Payroll Summary
+
+The Payroll Summary activity runs the aggregation data flow and writes results to:
+
+Azure SQL Database summary table
+
+Azure Synapse Analytics external table
+
+8.3 Pipeline Execution
+
+Trigger the pipeline manually or via schedule
+
+Monitor execution using the ADF Monitor tab
+
+Ensure all activities complete successfully
 ## Final Verification
 
 * Ensure all pipelines succeed
