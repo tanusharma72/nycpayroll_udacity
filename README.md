@@ -21,7 +21,7 @@ This project demonstrates an end-to-end data engineering pipeline on Azure using
 
 Create the following Azure resources:
 
-* Azure Data Lake Storage Gen2 (Storage Account)
+* Azure Data Lake Storage Gen2 (Storage Account) - Enable Hierarchical Namespace (Required)
 * Azure SQL Database named **`db_nycpayroll`**
 * Azure Data Factory
 * Azure Synapse Analytics Workspace
