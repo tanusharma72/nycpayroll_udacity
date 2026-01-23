@@ -26,7 +26,7 @@ Create the following Azure resources:
 * Azure Data Factory
 * Azure Synapse Analytics Workspace
 
-
+---
 
 ### 1.2 Configure Azure Data Lake Storage Gen2
 
@@ -37,7 +37,7 @@ Create the following Azure resources:
    * `dirhistoryfiles`
    * `dirstaging`
 
-
+---
 
 ### 1.3 Upload Source Files
 
@@ -54,29 +54,29 @@ Upload the files as shown below:
 
 * `nycpayroll_2020.csv`
 
-
+---
 
 ## Step 2: Create External Objects in Synapse Analytics
 
 Run the following commands in the Synapse SQL editor (Serverless SQL Pool):
 
-
+```sql
 CREATE DATABASE databasename;
 USE databasename;
-
+```
 
 ### 2.1 External Data Source
 
-
+```sql
 CREATE EXTERNAL DATA SOURCE NYC_ADLS
 WITH (
     LOCATION = 'https://practiceaccount.dfs.core.windows.net/payrollfiles'
 );
-
+```
 
 ### 2.2 External File Format
 
- 
+```sql
 CREATE EXTERNAL FILE FORMAT CSV_Format
 WITH (
     FORMAT_TYPE = DELIMITEDTEXT,
@@ -85,10 +85,15 @@ WITH (
         FIRST_ROW = 2
     )
 );
+```
 
+---
 
-### 2.3 Create External View /table for Payroll Summary
+### 2.3 Create External View for Payroll Summary
 
+```sql
+DROP VIEW IF EXISTS dbo.NYC_Payroll_Summary;
+GO
 
 CREATE VIEW dbo.NYC_Payroll_Summary
 AS
@@ -128,6 +133,14 @@ GO
 ```
 
 ### 3.2 Payroll Data Tables (2020 & 2021)
+```sql
+CREATE TABLE [dbo].[NYC_Payroll_Summary]( 
+    [FiscalYear] [int] NULL, 
+    [AgencyName] [varchar](50) NULL, 
+    [TotalPaid] [float] NULL 
+) 
+GO 
+```
 
 ```sql
 CREATE TABLE dbo.NYC_Payroll_Data_2020 (
@@ -225,6 +238,7 @@ Create datasets for:
 
 * 5 source CSV files
 * 1 staging directory (`dirstaging`)
+  
 
 ### 5.2 SQL Database Datasets
 
@@ -301,7 +315,9 @@ toInteger(FiscalYear) >= $dataflow_param_fiscalyear
    * Store results in SQL DB and Synapse Analytics
 2. Trigger the pipeline manually or using a schedule
 3. Monitor pipeline execution
-4. Verify data in SQL DB and Synapse Analytics
+4. Verify data in SQL DB and Synapse
+   <img width="1920" height="1080" alt="Screenshot (184)" src="https://github.com/user-attachments/assets/cf4cd330-7d25-4759-9178-37650ae6f78b" />
+Analytics
 
 ---
 
