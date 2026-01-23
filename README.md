@@ -1,4 +1,4 @@
-# NYC Payroll Data Engineering Project
+# Data-integrations-pipelines-for-NYC-Payroll-Data-Analytics-Serverless-Pool  
 
 This project demonstrates an end-to-end data engineering pipeline on Azure using NYC Payroll data. It covers data ingestion, transformation, aggregation, and analytics using Azure Data Factory, Azure SQL Database, Azure Data Lake Gen2, and Azure Synapse Analytics.
 
